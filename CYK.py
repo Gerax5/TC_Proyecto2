@@ -3,7 +3,6 @@ class CYK:
         self.rules = rules
         self.startSymbol = startSymbol
 
-        # print(f"rules: {self.rules}")
 
     def getNonTerminals(self, production):
         result = []
@@ -13,15 +12,12 @@ class CYK:
                 result.append(non_terminal)
         return result
 
-    # Función para imprimir la tabla CYK
 
     def cykParser(self, word):
         word = word.split(" ") 
-        # print(word)
         n = len(word)
         table = [[set() for _ in range(n)] for _ in range(n)]
 
-        # Inicialización
         for i in range(n):
             terminals = self.getNonTerminals([word[i]])
             table[i][i].update(terminals)
@@ -57,6 +53,3 @@ class CYK:
                 symbols = ','.join(cell)
                 print(f"{symbols}".center(10), end=' ')
             print()
-
-        # Imprimir la tabla
-        # print_cyk_table(table, word)
