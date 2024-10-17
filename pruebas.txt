@@ -75,3 +75,20 @@ X3  → then S
 C   → true | false
 ACTION → A
 A   → run | stop
+
+
+S -> A G
+A -> D N
+G -> V A | V
+D -> the
+N -> dog | cat
+V -> chased | slept
+
+S → NP VP
+NP → DET N
+VP → V NP | V
+DET → the
+N → dog 
+N → cat
+V → chased
+V → slept

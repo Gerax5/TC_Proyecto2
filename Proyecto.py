@@ -82,7 +82,7 @@ for i, gramatica in enumerate(gramaticas):
 
     cyk = CYK(Chumsky.grammar, startSymbol)
 
-    string = "the cat drinks the beer"
+    string = "0 0 1 1"
 
     belongs, cyk_table = cyk.cykParser(string)
 

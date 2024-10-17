@@ -89,7 +89,7 @@ class NormalFormCFG:
             cambiando = False
             for nonTerminal, productions in self.grammar.items():
                 for production in productions:
-                    if any(symbol.islower() or symbol.isnumeric() or symbol in generadores for symbol in production):
+                    if all(symbol.islower() or symbol.isnumeric() or symbol in generadores for symbol in production):
                         if nonTerminal not in generadores:
                             generadores.add(nonTerminal)
                             cambiando = True
