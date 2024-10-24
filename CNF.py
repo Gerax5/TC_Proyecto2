@@ -1,5 +1,6 @@
 class CNF:
     def __init__(self, grammar, newNonTerminalLetter = "X"):
+        self.characters = "*/-+()$%&#"
         self.grammar = grammar
         self.newNonTerminalLetter = newNonTerminalLetter
         self.counter = 0
@@ -49,7 +50,7 @@ class CNF:
             for production in productions:
                 if len(production) > 2:
                     first, *rest = production
-                    if first.islower() or first.isnumeric():
+                    if first.islower() or first.isnumeric() or first in self.characters:
                         if first in self.terminalMap:
                             first = self.terminalMap[first]
                         else:
@@ -60,7 +61,7 @@ class CNF:
                     newNonTerminal = getNewNonTerminal()
                     newProductions.add((first, newNonTerminal))
                     for index, symbol in enumerate(rest[:-1]):
-                        if symbol.islower() or symbol.isnumeric():
+                        if symbol.islower() or symbol.isnumeric() or symbol in self.characters:
                             if symbol in self.terminalMap:
                                 symbol = self.terminalMap[symbol]
                             else:
@@ -70,7 +71,7 @@ class CNF:
                                 symbol = symbolNT
 
                         if index + 1 == len(rest[:-1]):
-                            if rest[-1].islower() or rest[-1].isnumeric():
+                            if rest[-1].islower() or rest[-1].isnumeric() or rest[-1] in self.characters:
                                 if rest[-1] in self.terminalMap:
                                     nextNonTerminal = self.terminalMap[rest[-1]]
                                 else:
@@ -95,12 +96,12 @@ class CNF:
                             newNonTerminal = nextNonTerminal
                 elif len(production) == 2:
                     left, right = production
-                    if left.islower() or left.isnumeric():
+                    if left.islower() or left.isnumeric() or left in self.characters:
                         if left not in self.terminalMap:
                             self.terminalMap[left] = getNewNonTerminal()
                             newGrammar[self.terminalMap[left]] = {(left,)}
                         left = self.terminalMap[left]
-                    if right.islower() or right.isnumeric():
+                    if right.islower() or right.isnumeric() or right in self.characters:
                         if right not in self.terminalMap:
                             self.terminalMap[right] = getNewNonTerminal()
                             newGrammar[self.terminalMap[right]] = {(right,)}

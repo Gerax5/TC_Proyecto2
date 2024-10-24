@@ -5,6 +5,7 @@ class NormalFormCFG:
     def __init__(self, grammar, startSymbol):
         self.grammar = grammar 
         self.startSymbol = startSymbol
+        self.characters = "*/-+()$%&#"
         self.eliminarProduccionesEpsilon()
         self.eliminarProduccionesUnarias()
         self.eliminarSimbolosInutiles()
@@ -89,13 +90,13 @@ class NormalFormCFG:
             cambiando = False
             for nonTerminal, productions in self.grammar.items():
                 for production in productions:
-                    if all(symbol.islower() or symbol.isnumeric() or symbol in generadores for symbol in production):
+                    if all(symbol.islower() or symbol.isnumeric() or symbol in self.characters or symbol in generadores for symbol in production):
                         if nonTerminal not in generadores:
                             generadores.add(nonTerminal)
                             cambiando = True
 
         self.grammar = {
-            nt: [p for p in productions if all(s.islower() or s.isnumeric() or s in generadores for s in p)]
+            nt: [p for p in productions if all(s.islower() or s.isnumeric() or s in self.characters or s in generadores for s in p)]
             for nt, productions in self.grammar.items() if nt in generadores
         }
         
@@ -113,6 +114,6 @@ class NormalFormCFG:
                                 cambiando = True
 
         self.grammar = {
-            nt: [p for p in productions if all(s.islower() or s.isnumeric() or s in alcanzables for s in p)]
+            nt: [p for p in productions if all(s.islower() or s.isnumeric() or s in self.characters or s in alcanzables for s in p)]
             for nt, productions in self.grammar.items() if nt in alcanzables
         }
