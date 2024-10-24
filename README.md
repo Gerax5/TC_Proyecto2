@@ -6,3 +6,4 @@
 * Hay mas pruebas que se pueden realizar en el archivo `Pruebas.py`
 ## [Documentacion](https://github.com/Gerax5/TC_Proyecto2/blob/main/Documentacion.pdf)
 ## Video de prueba
+https://youtu.be/7_HZMOL_gNQ
